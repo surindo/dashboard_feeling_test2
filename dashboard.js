@@ -177,29 +177,53 @@ function bar(id, d, k, min, max, unit) {
 
 /* ================= RADAR ================= */
 function radar(dS, kS, dC, kC, dN, kN) {
-  Highcharts.chart("chart-radar", {
+  const chart = Highcharts.chart("chart-radar", {
     chart: {
       polar: true,
       type: "area",
-      spacing: [40, 40, 40, 40]
+      spacing: [0, 0, 0, 0],
+      animation: false
     },
+
     title: { text: "" },
     credits: { enabled: false },
+
+    pane: {
+      size: "90%"   // 🔥 radar tetap besar
+    },
 
     xAxis: {
       categories: ["Stability", "Comfort", "Noise"],
       tickmarkPlacement: "on",
-      lineWidth: 0
+      lineWidth: 0,
+
+      labels: {
+        enabled: true,
+        reserveSpace: true,
+        allowOverlap: true,
+        crop: false,
+        overflow: "allow",
+
+        distance: -25,          // 🔥 NEGATIF → label masuk lingkaran
+
+        style: {
+          fontSize: "13px",
+          fontWeight: "600",
+          textAlign: "center"
+        }
+      }
     },
 
     yAxis: {
       min: 0,
       max: 100,
       tickAmount: 5,
-      gridLineInterpolation: "circle"
+      gridLineInterpolation: "circle",
+      labels: { enabled: false }
     },
 
     plotOptions: {
+      series: { animation: false },
       area: {
         fillOpacity: 0.25,
         marker: { enabled: true, radius: 3 }
@@ -212,11 +236,28 @@ function radar(dS, kS, dC, kC, dN, kN) {
     },
 
     series: [
-      { name: "Dunlop", data: [dS, dC, dN], color: "#e6b800" },
-      { name: "Kompetitor", data: [kS, kC, kN], color: "#d40000" }
+      {
+        name: "Dunlop",
+        data: [dS ?? 0, dC ?? 0, dN ?? 0],
+        color: "#e6b800"
+      },
+      {
+        name: "Kompetitor",
+        data: [kS ?? 0, kC ?? 0, kN ?? 0],
+        color: "#d40000"
+      }
     ]
   });
+
+  /* pastikan reflow setelah grid / zoom */
+  setTimeout(() => {
+    chart.reflow();
+    chart.redraw();
+  }, 100);
 }
+
+
+
 
 /* ================= GRIDSTACK ================= */
 const grid = GridStack.init({
