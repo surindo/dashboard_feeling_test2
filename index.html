@@ -44,7 +44,15 @@
         <button id="zoom-out">−</button>
         <button id="zoom-in">+</button>
         <button id="fullscreen">⛶</button>
+
+        <button
+          onclick="window.location.href='https://surindo.github.io/dashboard_braking_test/'"
+          title="Go to Braking Test Dashboard"
+        >
+          →
+        </button>
       </div>
+
     </div>
   </header>
 
@@ -88,7 +96,7 @@
     <!-- ================= TABLE ZENIX ================= -->
     <div class="grid-stack-item" gs-w="3" gs-h="2" style="margin-top:15px;">
       <div class="grid-stack-item-content table-wrap">
-        <h3>Zenix</h3>
+        <h3>Zenix <span id="zenix-count"></span></h3>
         <table class="styled-table">
           <thead>
             <tr>
@@ -108,7 +116,7 @@
     <!-- ================= TABLE M6 ================= -->
     <div class="grid-stack-item" gs-w="6" gs-h="2" style="margin-top:15px;">
       <div class="grid-stack-item-content table-wrap">
-        <h3>M6</h3>
+        <h3>M6 <span id="m6-count"></span></h3>
         <table class="styled-table">
           <thead>
             <tr>
