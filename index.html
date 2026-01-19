@@ -5,146 +5,80 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Dashboard Feeling Test</title>
 
-  <!-- Highcharts -->
   <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/highcharts-more.js"></script>
-
-  <!-- GridStack -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/gridstack@9.2.0/dist/gridstack.min.css"
-    rel="stylesheet"
-  />
-  <script src="https://cdn.jsdelivr.net/npm/gridstack@9.2.0/dist/gridstack-all.js"></script>
-
-  <!-- Custom CSS -->
   <link rel="stylesheet" href="dashboard.css" />
-  <link rel="shortcut icon" href="logo.ico">
 </head>
 
 <body>
-<div class="wrap">
 
-  <!-- ================= HEADER ================= -->
-  <header class="dashboard-header">
-    <h1>Dashboard — Feeling Test</h1>
+<header class="dashboard-header">
+  <h1 id="chart-title">Stability</h1>
 
-    <div class="header-right">
-      <!-- ===== FILTER ===== -->
-      <div class="filters">
-        <input type="date" id="dateFilter">
-        <select id="sesiFilter">
-          <option value="1">Sesi 1</option>
-          <option value="2">Sesi 2</option>
-        </select>
-        <button id="btnLoad">Load</button>
-      </div>
+  <div class="filters">
+    <input type="date" id="dateFilter">
+    <select id="sesiFilter">
+      <option value="1">Sesi 1</option>
+      <option value="2">Sesi 2</option>
+    </select>
+    <button id="btnLoad">Load</button>
+    <button id="fullscreen">⛶</button>
+  </div>
+</header>
 
-      <!-- ===== ZOOM ===== -->
-      <div class="zoom-controls">
-        <button id="zoom-out">−</button>
-        <button id="zoom-in">+</button>
-        <button id="fullscreen">⛶</button>
+<!-- HERO CHART -->
+<section class="chart-section">
+  <div id="main-chart"></div>
+</section>
 
-        <button
-          onclick="window.location.href='https://surindo.github.io/dashboard_braking_test/'"
-          title="Go to Braking Test Dashboard"
-        >
-          →
-        </button>
-      </div>
+<!-- TABLE SESSION -->
+<section class="table-section">
 
-    </div>
-  </header>
+  <!-- STABILITY -->
+  <div class="table-wrap session-table" data-session="stability">
+    <h3>Zenix — Stability <span id="zenix-count"></span></h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Grup</th>
+          <th class="dunlop-sub">Dunlop</th>
+          <th class="komp-sub">Kompetitor</th>
+        </tr>
+      </thead>
+      <tbody id="zenix-body"></tbody>
+    </table>
+  </div>
 
-  <!-- ================= GRIDSTACK ================= -->
-  <section class="grid-stack">
+  <!-- COMFORT -->
+  <div class="table-wrap session-table" data-session="comfort">
+    <h3>M6 — Comfort <span id="m6c-count"></span></h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Grup</th>
+          <th class="dunlop-sub">Dunlop</th>
+          <th class="komp-sub">Kompetitor</th>
+        </tr>
+      </thead>
+      <tbody id="m6c-body"></tbody>
+    </table>
+  </div>
 
-    <!-- ================= CHARTS ================= -->
-    <div class="grid-stack-item" gs-w="3" gs-h="3">
-      <div class="grid-stack-item-content card small">
-        <h3>Stability <span>(m/s² · higher is better)</span></h3>
-        <div id="chart-stability" class="small-chart"></div>
-      </div>
-    </div>
+  <!-- NOISE -->
+  <div class="table-wrap session-table" data-session="noise">
+    <h3>M6 — Noise <span id="m6n-count"></span></h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Grup</th>
+          <th class="dunlop-sub">Dunlop</th>
+          <th class="komp-sub">Kompetitor</th>
+        </tr>
+      </thead>
+      <tbody id="m6n-body"></tbody>
+    </table>
+  </div>
 
-    <div class="grid-stack-item" gs-w="3" gs-h="3">
-      <div class="grid-stack-item-content card small">
-        <h3>Comfort <span>(m/s² · lower is better)</span></h3>
-        <div id="chart-comfort" class="small-chart"></div>
-      </div>
-    </div>
-
-    <div class="grid-stack-item" gs-w="3" gs-h="3">
-      <div class="grid-stack-item-content card small">
-        <h3>Noise <span>(dB · lower is better)</span></h3>
-        <div id="chart-noise" class="small-chart"></div>
-      </div>
-    </div>
-
-    <div class="grid-stack-item" gs-w="3" gs-h="4">
-      <div class="grid-stack-item-content card small">
-        <h3>
-          Radar Comparison <br>
-          <span>
-            All parameters have been normalized to a <b>High is Better</b> scale.
-          </span>
-        </h3>
-        <div id="chart-radar" class="small-chart"></div>
-      </div>
-    </div>
-
-    <!-- ================= TABLE ZENIX ================= -->
-    <div class="grid-stack-item" gs-w="3" gs-h="2" style="margin-top:15px;">
-      <div class="grid-stack-item-content table-wrap">
-        <h3>Zenix <span id="zenix-count"></span></h3>
-        <table class="styled-table">
-          <thead>
-            <tr>
-              <th rowspan="2">Grup</th>
-              <th colspan="2">Stability (m/s²)</th>
-            </tr>
-            <tr>
-              <th class="dunlop-sub">Dunlop</th>
-              <th class="komp-sub">Kompetitor</th>
-            </tr>
-          </thead>
-          <tbody id="zenix-body"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ================= TABLE M6 ================= -->
-    <div class="grid-stack-item" gs-w="6" gs-h="2" style="margin-top:15px;">
-      <div class="grid-stack-item-content table-wrap">
-        <h3>M6 <span id="m6-count"></span></h3>
-        <table class="styled-table">
-          <thead>
-            <tr>
-              <th rowspan="2">Grup</th>
-              <th colspan="2">Comfort (m/s²)</th>
-              <th colspan="2">Noise (dB)</th>
-            </tr>
-            <tr>
-              <th class="dunlop-sub">Dunlop</th>
-              <th class="komp-sub">Kompetitor</th>
-              <th class="dunlop-sub">Dunlop</th>
-              <th class="komp-sub">Kompetitor</th>
-            </tr>
-          </thead>
-          <tbody id="m6-body"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ================= LOGO ================= -->
-    <div class="grid-stack-item" gs-w="3" gs-h="2" style="margin-top:15px;">
-      <div class="grid-stack-item-content">
-        <img src="logodunlop.jpg" alt="" style="width:100%">
-      </div>
-    </div>
-
-  </section>
-</div>
+</section>
 
 <script type="module" src="dashboard.js"></script>
 </body>

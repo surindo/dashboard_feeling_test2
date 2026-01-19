@@ -1,14 +1,11 @@
 :root {
   --bg: #f6f8fb;
-  --card: #ffffff;
+  --card: #fff;
   --dunlop-sub: #ffe680;
   --komp-sub: #ffd6d6;
 }
 
-/* ================= RESET ================= */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -16,168 +13,90 @@ body {
   background: var(--bg);
 }
 
-/* ================= WRAPPER ================= */
-.wrap {
-  max-width: 1500px;
-  margin: 16px auto;
-  padding: 16px 20px;
-}
-
-/* ================= HEADER ================= */
+/* HEADER */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
-  margin-left: 10px;
+  padding: 14px 20px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
 }
 
-.dashboard-header h1 {
-  margin: 0;
-  font-size: 20px;
-}
-
-/* ================= HEADER RIGHT ================= */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-/* ================= FILTER ================= */
+/* FILTER */
 .filters {
   display: flex;
   gap: 8px;
 }
 
 .filters input,
-.filters select {
-  padding: 6px 8px;
+.filters select,
+.filters button {
+  padding: 6px 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 13px;
 }
 
 .filters button {
-  padding: 6px 14px;
-  border: none;
   background: #333;
   color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.filters button:hover {
-  background: #111;
-}
-
-/* ================= ZOOM & FULLSCREEN ================= */
-.zoom-controls {
-  display: flex;
-  gap: 6px;
-}
-
-.zoom-controls button {
-  width: 30px;
-  height: 30px;
   border: none;
-  border-radius: 6px;
-  background: #eaeaea;
-  font-size: 16px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.zoom-controls button:hover {
-  background: #d5d5d5;
-}
-
-/* ===================================================== */
-/* ================= GRIDSTACK AREA ==================== */
-/* ===================================================== */
-
-.grid-stack-item-content {
-  overflow: hidden;
-}
-
-/* ===================================================== */
-/* ================= CARD =============================== */
-/* ===================================================== */
-
-.card.small {
-  background: var(--card);
+/* CHART */
+.chart-section {
+  height: 55vh;
   padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
-.card.small h3 {
-  margin: 0 0 6px;
-  font-size: 14px;
-}
-
-.card.small h3 span {
-  font-size: 11px;
-  color: #666;
-}
-
-/* ================= CHART ================= */
-.small-chart {
+#main-chart {
   width: 100%;
   height: 100%;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.1);
 }
 
-/* ===================================================== */
-/* ================= TABLE SECTION ====================== */
-/* ===================================================== */
-
-.grid-2-table {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
+/* TABLE */
+.table-section {
+  padding: 16px;
 }
 
-/* TABLE CARD */
+.session-table {
+  display: none;
+}
+
+.session-table.active {
+  display: block;
+}
+
 .table-wrap {
   background: var(--card);
   padding: 14px;
   border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 14px rgba(0,0,0,.1);
 }
 
-.table-wrap h3 {
-  margin: 0 0 6px;
-}
-
-/* ================= TABLE ================= */
 table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
 }
 
-th,
-td {
-  padding: 8px 6px;
+th, td {
+  padding: 8px;
   border-bottom: 1px solid #e4e4e4;
   text-align: center;
 }
 
-thead tr:first-child th {
+thead th {
   background: #ececec;
 }
 
-thead .dunlop-sub {
-  background: var(--dunlop-sub);
-}
-
-thead .komp-sub {
-  background: var(--komp-sub);
-}
+.dunlop-sub { background: var(--dunlop-sub); }
+.komp-sub { background: var(--komp-sub); }
 
 tbody tr:nth-child(even) {
   background: #f9f9f9;
@@ -185,48 +104,4 @@ tbody tr:nth-child(even) {
 
 .tdname {
   text-align: left;
-  padding-left: 12px;
-}
-
-/* ===================================================== */
-/* ================= ANIMATION ========================== */
-/* ===================================================== */
-
-@keyframes nyundul {
-  from {
-    transform: translateY(12px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* ===================================================== */
-/* ================= RESPONSIVE ========================= */
-/* ===================================================== */
-
-@media (max-width: 900px) {
-  .grid-2-table {
-    grid-template-columns: 1fr;
-  }
-
-  .dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .header-right {
-    width: 100%;
-    justify-content: space-between;
-  }
-}
-
-.table-wrap h3 span {
-  font-size: 12px;
-  color: #777;
-  font-weight: 500;
-  margin-left: 6px;
 }
